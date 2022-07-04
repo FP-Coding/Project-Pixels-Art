@@ -1,5 +1,6 @@
 const pixelBoard = document.getElementById('pixel-board');
 const lineFather = document.getElementsByClassName('line');
+const pixels = document.getElementsByClassName('pixel');
 
 function createLines(numberLines) {
   for (let i = 0; i < numberLines; i += 1) {
@@ -21,3 +22,11 @@ function putPixels(numberPixels) {
 }
 
 putPixels(5);
+
+function resetaQuadro() {
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].style.backgroundColor = 'white';
+  }
+}
+
+window.onload = resetaQuadro;
