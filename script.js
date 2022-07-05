@@ -25,8 +25,12 @@ function randomColor() {
   return arrayColors;
 }
 
-function applyRandomColor(arrayColors) {
+function applyRandomColor(arrayElements) {
   const colors = randomColor();
+  const elements = arrayElements;
+  for (let index = 0; index < colors.length; index += 1) {
+    elements[index].style.backgroundColor = `${colors[index]}`;
+  }
 }
 
 function getColor(event) {
@@ -110,8 +114,8 @@ btnGenerateBoard.addEventListener('click', () => {
 });
 
 window.onload = function executeOnLoad() {
+  createBoard(5);
   resetBoard();
   startFirstColorAsBlack();
-  createBoard(5);
   applyRandomColor(colorsRandom);
 };
