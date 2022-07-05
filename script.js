@@ -10,11 +10,24 @@ const paletteColor = document.getElementById('color-palette');
 const btnClearBoard = document.getElementById('clear-board');
 const btnGenerateBoard = document.getElementById('generate-board');
 const input = document.getElementById('board-size');
+const colorsRandom = [secondColor, thirdColor, fourthColor];
 firstColor.style.backgroundColor = 'black';
-secondColor.style.backgroundColor = 'red';
-thirdColor.style.backgroundColor = 'yellow';
-fourthColor.style.backgroundColor = 'green';
 let boardSize = 5;
+
+function randomColor() {
+  const arrayColors = [];
+  for (let index = 0; index < 3; index += 1) {
+    const red = Math.round(Math.random() * 255);
+    const green = Math.round(Math.random() * 255);
+    const blue = Math.round(Math.random() * 255);
+    arrayColors.push(`rgb(${red},${green},${blue})`);
+  }
+  return arrayColors;
+}
+
+function applyRandomColor(arrayColors) {
+  const colors = randomColor();
+}
 
 function getColor(event) {
   const evento = event;
@@ -28,7 +41,6 @@ function getColor(event) {
 function inputColor(event) {
   const evento = event;
   evento.target.style.backgroundColor = colorSelected[0].style.backgroundColor;
-  console.log(evento.target.style.backgroundColor);
 }
 
 function createLines(numberLines) {
@@ -39,26 +51,34 @@ function createLines(numberLines) {
   }
 }
 
+function verifyInputValue(value) {
+  let valueSize = value;
+  if (valueSize < 5) {
+    valueSize = 5;
+  } else if (valueSize > 50) {
+    valueSize = 50;
+  }
+  return valueSize;
+}
+
 function createBoard(numberPixels) {
-  createLines(numberPixels);
-  for (let i = 0; i < numberPixels; i += 1) {
-    for (let index = 0; index < numberPixels; index += 1) {
+  const rightValue = verifyInputValue(numberPixels);
+  const sizeBoardValue = rightValue;
+  createLines(rightValue);
+  for (let i = 0; i < sizeBoardValue; i += 1) {
+    for (let index = 0; index < sizeBoardValue; index += 1) {
       const pixel = document.createElement('div');
       pixel.className = 'pixel';
       pixel.addEventListener('click', inputColor);
       lines[index].appendChild(pixel);
     }
   }
-  boardSize = numberPixels;
+  boardSize = sizeBoardValue;
 }
 
-createBoard(boardSize);
-
 function removeBoard(currentBoardSize) {
-  if (input.value >= 5) {
-    for (let i = 0; i < currentBoardSize; i += 1) {
-      pixelBoard.removeChild(pixelBoard.firstChild);
-    }
+  for (let i = 0; i < currentBoardSize; i += 1) {
+    pixelBoard.removeChild(pixelBoard.firstChild);
   }
 }
 
@@ -92,4 +112,6 @@ btnGenerateBoard.addEventListener('click', () => {
 window.onload = function executeOnLoad() {
   resetBoard();
   startFirstColorAsBlack();
+  createBoard(5);
+  applyRandomColor(colorsRandom);
 };
