@@ -16,36 +16,23 @@ let boardSize = 5;
 
 function randomColor() {
   const arrayColors = [];
-  for (let index = 0; index < 3; index += 1) {
+  while (arrayColors.length < 3) {
     const red = Math.round(Math.random() * 255);
     const green = Math.round(Math.random() * 255);
     const blue = Math.round(Math.random() * 255);
-    arrayColors.push(`rgb(${red},${green},${blue})`);
+    if (arrayColors.includes(`rgb(${red}, ${green}, ${blue})`) === false) {
+      arrayColors.push(`rgb(${red},${green},${blue})`);
+      console.log(`rgb(${red},${green},${blue})`);
+    }
   }
   return arrayColors;
-}
-
-function verifyRandomColor(arrayColors) {
-  const fdColorIsDifferent = arrayColors[1] !== arrayColors[2] && arrayColors[1] !== arrayColors[3];
-  const sdColorIsDifferent = arrayColors[2] !== arrayColors[1] && arrayColors[2] !== arrayColors[3];
-  const tdColorIsDifferent = arrayColors[3] !== arrayColors[1] && arrayColors[3] !== arrayColors[2];
-  let statusValidate;
-  if (fdColorIsDifferent && sdColorIsDifferent && tdColorIsDifferent) {
-    statusValidate = true;
-  } else {
-    statusValidate = false;
-  }
-  return statusValidate;
 }
 
 function applyRandomColor(arrayElements) {
   const colors = randomColor();
   const elements = arrayElements;
-  const validateColors = verifyRandomColor(colors);
-  if (validateColors === true) {
-    for (let index = 0; index < colors.length; index += 1) {
-      elements[index].style.backgroundColor = `${colors[index]}`;
-    }
+  for (let index = 0; index < colors.length; index += 1) {
+    elements[index].style.backgroundColor = `${colors[index]}`;
   }
 }
 
