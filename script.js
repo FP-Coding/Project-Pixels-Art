@@ -7,6 +7,7 @@ const secondColor = document.getElementById('second-color');
 const thirdColor = document.getElementById('third-color');
 const fourthColor = document.getElementById('fourth-color');
 const paletteColor = document.getElementById('color-palette');
+const btnClearBoard = document.getElementById('clear-board');
 firstColor.style.backgroundColor = 'black';
 secondColor.style.backgroundColor = 'red';
 thirdColor.style.backgroundColor = 'yellow';
@@ -56,6 +57,8 @@ function resetBoard() {
     pixels[index].style.backgroundColor = 'white';
   }
 }
+
+btnClearBoard.addEventListener('click', resetBoard);
 
 function startFirstColorBlack() {
   firstColor.classList.add('selected');
