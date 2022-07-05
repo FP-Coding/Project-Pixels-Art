@@ -25,11 +25,27 @@ function randomColor() {
   return arrayColors;
 }
 
+function verifyRandomColor(arrayColors) {
+  const fdColorIsDifferent = arrayColors[1] !== arrayColors[2] && arrayColors[1] !== arrayColors[3];
+  const sdColorIsDifferent = arrayColors[2] !== arrayColors[1] && arrayColors[2] !== arrayColors[3];
+  const tdColorIsDifferent = arrayColors[3] !== arrayColors[1] && arrayColors[3] !== arrayColors[2];
+  let statusValidate;
+  if (fdColorIsDifferent && sdColorIsDifferent && tdColorIsDifferent) {
+    statusValidate = true;
+  } else {
+    statusValidate = false;
+  }
+  return statusValidate;
+}
+
 function applyRandomColor(arrayElements) {
   const colors = randomColor();
   const elements = arrayElements;
-  for (let index = 0; index < colors.length; index += 1) {
-    elements[index].style.backgroundColor = `${colors[index]}`;
+  const validateColors = verifyRandomColor(colors);
+  if (validateColors === true) {
+    for (let index = 0; index < colors.length; index += 1) {
+      elements[index].style.backgroundColor = `${colors[index]}`;
+    }
   }
 }
 
@@ -114,7 +130,7 @@ btnGenerateBoard.addEventListener('click', () => {
 });
 
 window.onload = function executeOnLoad() {
-  createBoard(5);
+  createBoard(boardSize);
   resetBoard();
   startFirstColorAsBlack();
   applyRandomColor(colorsRandom);
