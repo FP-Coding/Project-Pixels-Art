@@ -8,10 +8,13 @@ const thirdColor = document.getElementById('third-color');
 const fourthColor = document.getElementById('fourth-color');
 const paletteColor = document.getElementById('color-palette');
 const btnClearBoard = document.getElementById('clear-board');
+const btnGenerateBoard = document.getElementById('generate-board');
+const input = document.getElementById('board-size');
 firstColor.style.backgroundColor = 'black';
 secondColor.style.backgroundColor = 'red';
 thirdColor.style.backgroundColor = 'yellow';
 fourthColor.style.backgroundColor = 'green';
+let boardSize = 5;
 
 function getColor(event) {
   const evento = event;
@@ -28,8 +31,6 @@ function inputColor(event) {
   console.log(evento.target.style.backgroundColor);
 }
 
-paletteColor.addEventListener('click', getColor);
-
 function createLines(numberLines) {
   for (let i = 0; i < numberLines; i += 1) {
     const linePixels = document.createElement('div');
@@ -38,7 +39,7 @@ function createLines(numberLines) {
   }
 }
 
-function CreateBoard(numberPixels) {
+function createBoard(numberPixels) {
   createLines(numberPixels);
   for (let i = 0; i < numberPixels; i += 1) {
     for (let index = 0; index < numberPixels; index += 1) {
@@ -48,9 +49,18 @@ function CreateBoard(numberPixels) {
       lines[index].appendChild(pixel);
     }
   }
+  boardSize = numberPixels;
 }
 
-CreateBoard(5);
+createBoard(boardSize);
+
+function removeBoard(currentBoardSize) {
+  if (input.value >= 5) {
+    for (let i = 0; i < currentBoardSize; i += 1) {
+      pixelBoard.removeChild(pixelBoard.firstChild);
+    }
+  }
+}
 
 function resetBoard() {
   for (let index = 0; index < pixels.length; index += 1) {
@@ -58,13 +68,28 @@ function resetBoard() {
   }
 }
 
-btnClearBoard.addEventListener('click', resetBoard);
-
-function startFirstColorBlack() {
+function startFirstColorAsBlack() {
   firstColor.classList.add('selected');
 }
 
+function verifyInputNull() {
+  let errorMensage = '';
+  if (input.value === '') {
+    errorMensage = 'Board Inválido!';
+    alert(errorMensage);
+  }
+}
+
+paletteColor.addEventListener('click', getColor);
+btnClearBoard.addEventListener('click', resetBoard);
+btnGenerateBoard.addEventListener('click', verifyInputNull);
+btnGenerateBoard.addEventListener('click', () => {
+  removeBoard(boardSize);
+  createBoard(input.value);
+  resetBoard();
+});
+
 window.onload = function executeOnLoad() {
   resetBoard();
-  startFirstColorBlack();
+  startFirstColorAsBlack();
 };
