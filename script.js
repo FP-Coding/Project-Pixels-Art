@@ -6,6 +6,7 @@ const firstColor = document.getElementById('first-color');
 const secondColor = document.getElementById('second-color');
 const thirdColor = document.getElementById('third-color');
 const fourthColor = document.getElementById('fourth-color');
+const paletteColor = document.getElementById('color-palette');
 firstColor.style.backgroundColor = 'black';
 secondColor.style.backgroundColor = 'red';
 thirdColor.style.backgroundColor = 'yellow';
@@ -26,10 +27,7 @@ function inputColor(event) {
   console.log(evento.target.style.backgroundColor);
 }
 
-firstColor.addEventListener('click', getColor);
-secondColor.addEventListener('click', getColor);
-thirdColor.addEventListener('click', getColor);
-fourthColor.addEventListener('click', getColor);
+paletteColor.addEventListener('click', getColor);
 
 function createLines(numberLines) {
   for (let i = 0; i < numberLines; i += 1) {
