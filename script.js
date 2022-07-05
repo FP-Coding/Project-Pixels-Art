@@ -1,7 +1,35 @@
 const pixelBoard = document.getElementById('pixel-board');
 const lines = document.getElementsByClassName('line');
 const pixels = document.getElementsByClassName('pixel');
+const colorSelected = document.getElementsByClassName('selected');
 const firstColor = document.getElementById('first-color');
+const secondColor = document.getElementById('second-color');
+const thirdColor = document.getElementById('third-color');
+const fourthColor = document.getElementById('fourth-color');
+firstColor.style.backgroundColor = 'black';
+secondColor.style.backgroundColor = 'red';
+thirdColor.style.backgroundColor = 'yellow';
+fourthColor.style.backgroundColor = 'green';
+
+function getColor(event) {
+  const evento = event;
+  for (let i = 0; i < colorSelected.length; i += 1) {
+    colorSelected[i].classList.remove('selected');
+  }
+  evento.target.classList.add('selected');
+  colorSelected[0].style.backgroundColor = evento.target.style.backgroundColor.value;
+}
+
+function inputColor(event) {
+  const evento = event;
+  evento.target.style.backgroundColor = colorSelected[0].style.backgroundColor;
+  console.log(evento.target.style.backgroundColor);
+}
+
+firstColor.addEventListener('click', getColor);
+secondColor.addEventListener('click', getColor);
+thirdColor.addEventListener('click', getColor);
+fourthColor.addEventListener('click', getColor);
 
 function createLines(numberLines) {
   for (let i = 0; i < numberLines; i += 1) {
@@ -17,6 +45,7 @@ function CreateBoard(numberPixels) {
     for (let index = 0; index < numberPixels; index += 1) {
       const pixel = document.createElement('div');
       pixel.className = 'pixel';
+      pixel.addEventListener('click', inputColor);
       lines[index].appendChild(pixel);
     }
   }
@@ -30,11 +59,11 @@ function resetBoard() {
   }
 }
 
-function selectedColor() {
+function startFirstColorBlack() {
   firstColor.classList.add('selected');
 }
 
 window.onload = function executeOnLoad() {
   resetBoard();
-  selectedColor();
+  startFirstColorBlack();
 };

@@ -20,6 +20,8 @@ header {
   width: 40px;
   border: 1px solid black;
   display: inline-block;
+}
+.line {
   margin-top: -4px;
 }
 
@@ -32,18 +34,3 @@ header {
   margin: 15px 0 30px;
 }
 
-#first-color {
-  background-color: black;
-}
-
-#second-color {
-  background-color: green;
-}
-
-#third-color {
-  background-color: yellow;
-}
-
-#fourth-color {
-  background-color: red;
-}
