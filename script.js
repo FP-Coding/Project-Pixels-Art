@@ -20,7 +20,8 @@ function randomColor() {
     const red = Math.round(Math.random() * 255);
     const green = Math.round(Math.random() * 255);
     const blue = Math.round(Math.random() * 255);
-    if (arrayColors.includes(`rgb(${red}, ${green}, ${blue})`) === false) {
+    const cor = `rgb(${red}, ${green}, ${blue})`;
+    if (arrayColors.includes(cor) === false && cor !== 'rgb(0,0,0)' && cor !== 'rgb(255,255,255)') {
       arrayColors.push(`rgb(${red},${green},${blue})`);
       console.log(`rgb(${red},${green},${blue})`);
     }
