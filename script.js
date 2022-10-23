@@ -43,7 +43,7 @@ function getColor(event) {
     colorSelected[i].classList.remove('selected');
   }
   evento.target.classList.add('selected');
-  colorSelected[0].style.backgroundColor = evento.target.style.backgroundColor.value;
+  // colorSelected[0].style.backgroundColor = evento.target.style.backgroundColor.value;
 }
 
 function inputColor(event) {
